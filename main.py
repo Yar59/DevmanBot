@@ -26,10 +26,12 @@ def main():
                 attempts = response['new_attempts']
                 for attempt in attempts:
                     if attempt['is_negative']:
-                        text = f'Ваш урок {attempt["lesson_title"]} вернулся с проверки\nПотребуются доработки :(\n' \
+                        text = f'Ваш урок "{attempt["lesson_title"]}" вернулся с проверки\n' \
+                               f'Потребуются доработки :(\n' \
                                f'Посмотреть результат можно по ссылке {attempt["lesson_url"]}'
                     else:
-                        text = f'Ваш урок {attempt["lesson_title"]} вернулся с проверки\nБаги успешно спрятались :)\n' \
+                        text = f'Ваш урок "{attempt["lesson_title"]}" вернулся с проверки\n' \
+                               f'Баги успешно спрятались :)\n' \
                                f'Посмотреть результат можно по ссылке {attempt["lesson_url"]}'
                     bot.send_message(text=text, chat_id=chat_id)
         except requests.exceptions.HTTPError as error:
