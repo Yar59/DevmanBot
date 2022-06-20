@@ -7,9 +7,9 @@ from dotenv import dotenv_values
 
 
 def main():
-    tg_token = dotenv_values(".env")["TG_TOKEN"]
-    dvmn_token = dotenv_values(".env")["DVMN_TOKEN"]
-    chat_id = dotenv_values(".env")["CHAT_ID"]
+    tg_token = dotenv_values('.env')['TG_TOKEN']
+    dvmn_token = dotenv_values('.env')['DVMN_TOKEN']
+    chat_id = dotenv_values('.env')['CHAT_ID']
     headers = {'Authorization': f'Token {dvmn_token}'}
     payload = {'timestamp': ''}
     bot = telegram.Bot(token=tg_token)
@@ -39,9 +39,9 @@ def main():
         except requests.exceptions.ReadTimeout:
             logging.warning('ReadTimeout')
         except requests.exceptions.ConnectionError:
-            logging.warning("Connection Error\nPlease check your internet connection")
+            logging.warning('Connection Error\nPlease check your internet connection')
             sleep(5)
-            logging.warning("Trying to reconnect")
+            logging.warning('Trying to reconnect')
 
 
 if __name__ == '__main__':
