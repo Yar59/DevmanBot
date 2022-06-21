@@ -36,7 +36,6 @@ def main():
                             Ваш урок "{attempt["lesson_title"]}" вернулся с проверки' 
                             Баги успешно спрятались :)
                             Посмотреть результат можно по ссылке {attempt["lesson_url"]}'''
-                    print(textwrap.dedent(text))
                     bot.send_message(text=textwrap.dedent(text), chat_id=chat_id)
         except requests.exceptions.HTTPError as error:
             logging.warning(f'HTTPError: {error}')
