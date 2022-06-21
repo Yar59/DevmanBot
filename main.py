@@ -1,4 +1,5 @@
 import logging
+import textwrap
 from time import sleep
 
 import requests
@@ -26,14 +27,17 @@ def main():
                 attempts = changes['new_attempts']
                 for attempt in attempts:
                     if attempt['is_negative']:
-                        text = f'''Ваш урок "{attempt["lesson_title"]}" вернулся с проверки 
-                        Потребуются доработки :(
-                        Посмотреть результат можно по ссылке {attempt["lesson_url"]}'''
+                        text = f'''\
+                            Ваш урок "{attempt["lesson_title"]}" вернулся с проверки 
+                            Потребуются доработки :(
+                            Посмотреть результат можно по ссылке {attempt["lesson_url"]}'''
                     else:
-                        text = f'''Ваш урок "{attempt["lesson_title"]}" вернулся с проверки' 
-                        Баги успешно спрятались :)
-                        Посмотреть результат можно по ссылке {attempt["lesson_url"]}'''
-                    bot.send_message(text=text, chat_id=chat_id)
+                        text = f'''\
+                            Ваш урок "{attempt["lesson_title"]}" вернулся с проверки' 
+                            Баги успешно спрятались :)
+                            Посмотреть результат можно по ссылке {attempt["lesson_url"]}'''
+                    print(textwrap.dedent(text))
+                    bot.send_message(text=textwrap.dedent(text), chat_id=chat_id)
         except requests.exceptions.HTTPError as error:
             logging.warning(f'HTTPError: {error}')
         except requests.exceptions.ReadTimeout:
