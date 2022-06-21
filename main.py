@@ -18,12 +18,12 @@ def main():
         try:
             response = requests.get(url, headers=headers, params=payload, timeout=91)
             response.raise_for_status()
-            response = response.json()
-            if response['status'] == 'timeout':
-                payload['timestamp'] = response['timestamp_to_request']
-            elif response['status'] == 'found':
-                payload['timestamp'] = response['last_attempt_timestamp']
-                attempts = response['new_attempts']
+            changes = response.json()
+            if changes['status'] == 'timeout':
+                payload['timestamp'] = changes['timestamp_to_request']
+            elif changes['status'] == 'found':
+                payload['timestamp'] = changes['last_attempt_timestamp']
+                attempts = changes['new_attempts']
                 for attempt in attempts:
                     if attempt['is_negative']:
                         text = f'''Ваш урок "{attempt["lesson_title"]}" вернулся с проверки 
