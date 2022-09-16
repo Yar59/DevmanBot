@@ -4,7 +4,7 @@ from time import sleep
 
 import requests
 import telegram
-from dotenv import dotenv_values
+from environs import Env
 
 
 class TelegramLogsHandler(logging.Handler):
@@ -20,14 +20,18 @@ class TelegramLogsHandler(logging.Handler):
 
 
 def main():
-    tg_token = dotenv_values('.env')['TG_TOKEN']
-    tg_service_token = dotenv_values('.env')['TG_SERVICE_TOKEN']
-    dvmn_token = dotenv_values('.env')['DVMN_TOKEN']
-    chat_id = dotenv_values('.env')['CHAT_ID']
+    env = Env()
+    env.read_env()
+    tg_token = env('TG_TOKEN')
+    second_bot = env.bool('SECOND_BOT', False)
+    dvmn_token = env('DVMN_TOKEN')
+    chat_id = env('CHAT_ID')
 
     logger = logging.getLogger('tg_logger')
     logger.setLevel(logging.WARNING)
-    logger.addHandler(TelegramLogsHandler(tg_service_token, chat_id))
+    if second_bot:
+        tg_service_token = env('TG_SERVICE_TOKEN')
+        logger.addHandler(TelegramLogsHandler(tg_service_token, chat_id))
 
     headers = {'Authorization': f'Token {dvmn_token}'}
     payload = {'timestamp': ''}
