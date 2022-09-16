@@ -34,7 +34,8 @@ def main():
 
     bot = telegram.Bot(token=tg_token)
 
-    logger.warning("Bot starts")
+    logger.warning("Бот успешно запущен")
+
     while True:
         url = 'https://dvmn.org/api/long_polling/'
         try:
