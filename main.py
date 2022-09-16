@@ -65,10 +65,12 @@ def main():
             logger.warning(f'HTTPError: {error}')
         except requests.exceptions.ReadTimeout:
             logger.warning('ReadTimeout')
+        except telegram.error.TimedOut:
+            logging.warning("Не удалось отправить сообщение в телеграмм")
         except requests.exceptions.ConnectionError:
-            logger.warning('Connection Error\nPlease check your internet connection')
+            logging.warning('Connection Error\nPlease check your internet connection')
             sleep(5)
-            logger.warning('Trying to reconnect')
+            logging.warning('Trying to reconnect')
 
 
 if __name__ == '__main__':
