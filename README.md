@@ -46,7 +46,7 @@ python main.py
 ### Запуск с помощью Docker
 - Зарегистрируйтесь на сайте и скачайте [Docker](https://www.docker.com/)
 - Запустите создание образа командой `docker build --tag dvmn-bot-docker .`
-- Нажмите кнопку 'run' в Docker Descktop, установите переменные окружения и запустите образ
+- Нажмите кнопку 'run' в Docker Desktop, установите переменные окружения и запустите образ
 - Или запустите контейнер с помощью команды `docker run --env-file .env dvmn-bot-docker`
 
 ### Цель проекта
